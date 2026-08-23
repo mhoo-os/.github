@@ -18,6 +18,16 @@ GitHub organization custom instructions and automatic Copilot review are
 settings, not repository YAML. An organization owner must make the settings
 changes described below; this repository does not pretend to enable them.
 
+### Current platform blocker
+
+On 2026-08-24, the `mhoo-os` organization settings displayed: **"New Copilot
+Business signups are currently paused for organizations on the Free or Team
+plans."** The organization Copilot settings route redirected to General
+Settings, with no custom-instruction, custom-agent, or automatic-review control
+available. The agent profile and health workflow remain valid source
+configuration, but Copilot activation is blocked until GitHub makes an eligible
+Copilot organization plan/settings surface available.
+
 ### Organization custom instructions
 
 In **Organization settings -> Copilot -> Custom instructions**, add the
