@@ -4,9 +4,9 @@ Mhoo OS is the engineering organization for Mhoo, an AI-native Business Operatin
 
 ## Repositories
 
-- [`mhoo-twenty`](https://github.com/mhoo-os/mhoo-twenty) — operational UI layer, targeting Twenty `v2.32`.
+- [`mhoo-twenty`](https://github.com/mhoo-os/mhoo-twenty) — maintained Twenty UI and Workspace layer; clean-bootstrap source inputs preserve Twenty `v2.30.1` while production cutover remains NO-GO.
 - [`codex-lb`](https://github.com/mhoo-os/codex-lb) — AI routing infrastructure.
-- [`core`](https://github.com/mhoo-os/core) — future canonical business state layer; no authority migration yet.
+- [`core`](https://github.com/mhoo-os/core) — tenant-scoped business-state layer with local-only Phase 0 proofs; it has no production authority.
 - [`connectors`](https://github.com/mhoo-os/connectors) — future external integrations, with Clover planned through Nango.
 - [`infrastructure`](https://github.com/mhoo-os/infrastructure) — deployment, environments, security, and operations.
 
@@ -14,4 +14,4 @@ Platform coordination and cross-repository architecture live in [`mhoo`](https:/
 
 ## Current phase
 
-The organization is establishing a fresh, documentation-first foundation. There is no VPS deployment, production cutover, old database import, customer migration, Clover credential setup, or Mhoo Core implementation in this phase.
+The organization is building a fresh, local-only bootstrap. There is no production cutover, old database import, customer migration, Clover credential setup, or hosted Core authority. Core's Phase 0 proofs are local-only and do not establish production deployment, provider ingestion, or an authority transfer.
