@@ -1,5 +1,9 @@
 # Mhoo OS
 
+<p align="center">
+  <img src="./assets/mhoo-snout-transparent-1024.png" width="160" alt="Mhoo Snout logo" />
+</p>
+
 Mhoo OS is the engineering organization for Mhoo, an AI-native Business Operating System.
 
 ## Repositories
