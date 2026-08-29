@@ -5,12 +5,24 @@ This repository is the public organization profile and shared community-health r
 
 - **Owns:** the public organization entrypoint; shared community-health files.
 - **Does not own:** system architecture; application behavior; deployment or production status.
-- **Architecture authority:** [accepted Mhoo OS blueprint](https://github.com/mhoo-os/mhoo/blob/1374bbbe2a059320c29c8268ff971efbd9dfa256/docs/architecture/SYSTEM_BLUEPRINT.md) and [ADR-0006](https://github.com/mhoo-os/mhoo/blob/1374bbbe2a059320c29c8268ff971efbd9dfa256/ADR/0006-mhoo-os-system-architecture-blueprint.md).
+- **Architecture authority:** [accepted Mhoo OS blueprint](https://github.com/mhoo-os/mhoo/blob/0e94e6b00a3033215e4df3ab197e5559652c2436/docs/architecture/SYSTEM_BLUEPRINT.md) and [ADR-0008](https://github.com/mhoo-os/mhoo/blob/0e94e6b00a3033215e4df3ab197e5559652c2436/ADR/0008-twenty-framework-platform.md).
 - **Current implementation evidence:** [repository-owned source and records](https://github.com/mhoo-os/.github/tree/main).
 - **Deployment and production evidence:** owned separately by [Mhoo OS Infrastructure](https://github.com/mhoo-os/infrastructure/tree/main/docs); source, CI, publication, and rehearsal are not deployment or cutover proof.
 - **Upstream context:** Mhoo-native organization repository; not an upstream product fork.
 - **Contributors:** start with the [repository instructions](https://github.com/mhoo-os/.github/blob/main/AGENTS.md). Generated context is governed by [README governance](https://github.com/mhoo-os/mhoo/blob/main/docs/architecture/README_GOVERNANCE.md).
 <!-- mhoo-os-context:end -->
+
+## Current Twenty framework architecture
+
+[ADR-0008](https://github.com/mhoo-os/mhoo/blob/0e94e6b00a3033215e4df3ab197e5559652c2436/ADR/0008-twenty-framework-platform.md)
+makes the governed Mhoo-Twenty distribution Mhoo's sole application and data
+framework. `@mhoo/core` is the deterministic foundational Twenty App; later
+domain Apps use Twenty's native objects, permissions, APIs, MCP, Connections,
+jobs, files, and UI primitives.
+
+This is an accepted architecture decision, not implementation or production
+proof. The v2.37 source, Apps, image, deployment, recovery, VPS replacement,
+cutover, and old-runtime retirement remain separately gated.
 
 # Mhoo OS
 
@@ -21,15 +33,14 @@ architecture, implementation, and operational evidence.
 ## Repositories
 
 - [`mhoo-twenty`](https://github.com/mhoo-os/mhoo-twenty) — maintained
-  Twenty-based human application and Workspace layer. Twenty is the sole human
-  identity, authentication, session, membership, authorization, active-Workspace,
-  and Workspace-lifecycle authority.
-- [`core`](https://github.com/mhoo-os/core) — tenant-scoped durable state,
-  knowledge, evidence, provenance, relationships, retrieval structures,
-  model-output custody, and bounded execution. Core does not reason.
-- [`connectors`](https://github.com/mhoo-os/connectors) — provider authorization,
-  APIs, webhooks, cursors, retries, identifiers, and semantics. External
-  providers remain authoritative for provider facts.
+  Twenty distribution, sole application/data framework, and source owner for
+  Mhoo Apps including `@mhoo/core`.
+- [`core`](https://github.com/mhoo-os/core) — preserved source and bounded proof
+  history for the superseded separate-Core implementation; it receives no new
+  target behavior.
+- [`connectors`](https://github.com/mhoo-os/connectors) — conditional home for
+  accepted shared or integration-heavy provider seams. App-local OAuth uses
+  Twenty Connections by default.
 - Models and agents perform interpretation, reasoning, planning, synthesis,
   classification, recommendations, and natural-language generation.
 - [`codex-lb`](https://github.com/mhoo-os/codex-lb) — model-routing and gateway
@@ -40,10 +51,10 @@ architecture, implementation, and operational evidence.
 
 Platform coordination and cross-repository architecture live in [`mhoo`](https://github.com/mhoo-os/mhoo).
 
-The internal control plane is a private Mhoo-owned Twenty Workspace/App. It is
-not Core, a second identity system, or a second Workspace authority. The
-immutable Twenty Workspace ID to Core `tenant_id` mapping is only for isolation
-and correlation; it never grants authorization.
+The internal control plane is the deterministic `@mhoo/core` Twenty App. Core
+does not reason; models and agents reason through authorized tools. External
+providers remain authoritative for provider facts, and no identifier supplied
+by a caller grants Workspace authority.
 
 For current implementation state, follow each repository's source and evidence
 links. For deployment, recovery, production, and cutover state, use the scoped
