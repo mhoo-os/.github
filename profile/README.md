@@ -5,7 +5,7 @@ This repository is the public organization profile and shared community-health r
 
 - **Owns:** the public organization entrypoint; shared community-health files.
 - **Does not own:** system architecture; application behavior; deployment or production status.
-- **Architecture authority:** [accepted Mhoo OS blueprint](https://github.com/mhoo-os/mhoo/blob/108662ffc8a6dac69ab777d720775ec9879b49d0/docs/architecture/SYSTEM_BLUEPRINT.md) and [ADR-0008](https://github.com/mhoo-os/mhoo/blob/108662ffc8a6dac69ab777d720775ec9879b49d0/ADR/0008-twenty-framework-platform.md).
+- **Architecture authority:** [accepted Mhoo OS blueprint](https://github.com/mhoo-os/mhoo/blob/92e43a7b9a59570c76729fb5f8850c66bda6ef78/docs/architecture/SYSTEM_BLUEPRINT.md) and [ADR-0008](https://github.com/mhoo-os/mhoo/blob/92e43a7b9a59570c76729fb5f8850c66bda6ef78/ADR/0008-twenty-framework-platform.md).
 - **Current implementation evidence:** [repository-owned source and records](https://github.com/mhoo-os/.github/tree/main).
 - **Deployment and production evidence:** owned separately by [Mhoo OS Infrastructure](https://github.com/mhoo-os/infrastructure/tree/main/docs); source, CI, publication, and rehearsal are not deployment or cutover proof.
 - **Upstream context:** Mhoo-native organization repository; not an upstream product fork.
