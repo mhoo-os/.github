@@ -37,3 +37,12 @@ READMEs do not establish architecture, deployment, or production authority.
 - Documentation setup permits commits and review proposals only. It does not
   authorize automatic merge, profile publication, permission/visibility changes,
   credential handling, deployment or a new feature sprint.
+
+Before continuation or handoff, record the primary issue (or explicitly none),
+implementation-owning repository, coordinating repo head and retained worker
+(or none), exact source commit and PR/evidence links, existing run-ledger
+location, dependencies/blockers and their owners (or explicitly none/unknown),
+and the authorized next step. Carry this mapping into the handoff and
+acknowledge the authoritative instructions commit and reading path. Resolve
+unknown or conflicting ownership with the owning head before dependent work;
+a project label or issue status does not grant authority or create a new task.
