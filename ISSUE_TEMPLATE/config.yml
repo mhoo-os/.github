@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Private security report
+    url: https://github.com/mhoo-os/.github/security/advisories/new
+    about: Report vulnerabilities privately. Do not place secrets or customer data in a public issue.

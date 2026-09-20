@@ -5,6 +5,13 @@ catalog and must not be edited manually. Run the checker from `mhoo` for context
 changes. Keep organization-profile status prose evidence-linked and scoped;
 READMEs do not establish architecture, deployment, or production authority.
 
+The reusable organization-level contributor contract is
+[`AGENT_WORKING_AGREEMENT.md`](AGENT_WORKING_AGREEMENT.md). Keep that document
+short and repository-neutral. Repository `AGENTS.md` files may reference it,
+but must retain their own ownership boundary, commands, evidence requirements,
+and stop conditions. Delivery Room code and revisioned missions enforce routing
+and authority; public guidance must not pretend to provide those controls.
+
 
 ## Repository contract
 

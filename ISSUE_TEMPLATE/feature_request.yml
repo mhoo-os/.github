@@ -1,0 +1,31 @@
+name: Feature request
+description: Propose a bounded improvement and identify its owner.
+title: "[Feature]: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or operational problem needs solving?
+    validations:
+      required: true
+  - type: input
+    id: repository
+    attributes:
+      label: Proposed owning repository
+      description: Use "unknown" when ownership needs reconciliation.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Smallest useful outcome
+      description: Describe observable acceptance criteria, not an implementation wishlist.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Boundaries and risks
+      description: Note production, data, credential, cost, compatibility, or migration implications.
