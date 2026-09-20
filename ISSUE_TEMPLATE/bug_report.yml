@@ -1,0 +1,33 @@
+name: Bug report
+description: Report reproducible behavior in a Mhoo repository.
+title: "[Bug]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, customer data, or private operational evidence.
+  - type: input
+    id: repository
+    attributes:
+      label: Repository and revision
+      description: Name the repository and exact commit, release, or URL when known.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened?
+      description: Include the smallest safe reproduction and the actual result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe evidence
+      description: Link non-sensitive logs, screenshots, or checks and state what they prove.
