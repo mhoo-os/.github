@@ -9,9 +9,14 @@ Our current work explores financial investigation, provider integrations, and to
 
 ## Explore the work
 
+- [Delivery Room](https://github.com/mhoo-os/delivery-room) — governed delivery, review, evidence, and reconciliation for bounded agent work.
+- [Mhoo](https://github.com/mhoo-os/mhoo) — shared product context, skills, and experience work.
 - [Twenty foundation](https://github.com/mhoo-os/mhoo-twenty-next) — our current clean-foundation development repository, based on upstream Twenty.
-- [Finance investigation prototype](https://github.com/mhoo-os/finance-investigation-workspace) — a synthetic-data prototype for evidence-first financial analysis.
-- [Dark Factory](https://github.com/mhoo-os/dark-factory) — tooling for bounded, issue-driven software development.
+- [Mhoo Shell](https://github.com/mhoo-os/mhoo-shell) — reusable application shell and shared interface primitives.
+- [Design Studio](https://github.com/mhoo-os/design-studio) — design-system and product-interface exploration.
+- [Public landing](https://github.com/mhoo-os/mhoo-public-landing) — Mhoo's public experience.
+
+The earlier [Dark Factory](https://github.com/mhoo-os/dark-factory) repository is retained as historical source; Delivery Room supersedes it as the active governed-delivery system. The current finance-investigation and Clover MCP repositories are retained precursors, not the names of their planned replacement applications.
 
 ## How we work
 
