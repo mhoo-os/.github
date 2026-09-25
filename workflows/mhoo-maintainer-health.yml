@@ -1,0 +1,89 @@
+name: Mhoo Maintainer health
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    name: Read-only organization health report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summarize active repositories
+        env:
+          GH_ORG: mhoo-os
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          report_file="$(mktemp)"
+          trap 'rm -f "$report_file"' EXIT
+
+          healthy=()
+          attention=()
+          ci_broken=()
+          ci_unclassified=()
+          maintenance=()
+
+          while IFS= read -r repository; do
+            prs="$(gh api "repos/${GH_ORG}/${repository}/pulls?state=open&per_page=100" --jq 'length')"
+            issues="$(gh api "repos/${GH_ORG}/${repository}/issues?state=open&per_page=100" \
+              --jq '[.[] | select(.pull_request | not)] | length')"
+            branch_count="$(gh api --paginate "repos/${GH_ORG}/${repository}/branches?per_page=100" --jq 'length' | awk '{total += $1} END {print total + 0}')"
+            latest_run="$(gh api "repos/${GH_ORG}/${repository}/actions/runs?per_page=1" \
+              --jq '.workflow_runs[0] // empty | [.name, .status, (.conclusion // "")] | @tsv')"
+
+            if [[ -z "$latest_run" ]]; then
+              ci_unclassified+=("${repository} (no GitHub Actions run recorded)")
+              attention+=("${repository}")
+            else
+              IFS=$'\t' read -r workflow status conclusion <<< "$latest_run"
+              if [[ "$status" == "completed" && "$conclusion" != "success" && "$conclusion" != "skipped" ]]; then
+                ci_broken+=("${repository}: ${workflow} (${conclusion})")
+                attention+=("${repository}")
+              else
+                healthy+=("${repository}")
+              fi
+            fi
+
+            if (( prs > 0 || issues > 0 || branch_count > 1 )); then
+              maintenance+=("${repository}: ${prs} open PR(s), ${issues} open issue(s), ${branch_count} branch(es)")
+            fi
+          done < <(
+            gh api --paginate "orgs/${GH_ORG}/repos?type=all&per_page=100" \
+              --jq '.[] | select(.archived == false and .disabled == false) | .name'
+          )
+
+          {
+            echo '## Mhoo OS Health'
+            echo
+            echo 'This report is read-only. It covers non-archived repositories visible to the workflow token.'
+            echo
+            echo '### Repositories'
+            echo "- Healthy: ${healthy[*]:-None}"
+            echo "- Needs attention: ${attention[*]:-None}"
+            echo '- Unclassified: archived and disabled repositories are intentionally excluded.'
+            echo
+            echo '### CI'
+            echo "- Broken: ${ci_broken[*]:-None}"
+            echo '- Flaky/noisy: not inferred from a single latest run; inspect run history before labeling.'
+            echo "- Governance drift: ${ci_unclassified[*]:-None}"
+            echo
+            echo '### Maintenance'
+            printf '%s\n' "${maintenance[@]:-No open PR, issue, or non-default-branch candidates detected.}" | sed 's/^/- /'
+            echo '- Stale branches: branch age is deliberately not inferred; a human must confirm ownership and ancestry before cleanup.'
+            echo '- Documentation drift and dependency/image digest drift require repository-aware review and are not auto-mutated by v0.'
+            echo
+            echo '### Security/provenance'
+            echo '- Potential issues: no write, administration, deployment, or secret access is granted to this workflow.'
+            echo
+            echo '### Recommended actions'
+            echo '1. Investigate any broken or unclassified CI entry with the owning repository contract.'
+            echo '2. Review open PR and branch candidates before marking work stale or deleting anything.'
+            echo '3. Use the Mhoo Maintainer agent for evidence-backed, repository-aware follow-up.'
+          } >> "$GITHUB_STEP_SUMMARY"
